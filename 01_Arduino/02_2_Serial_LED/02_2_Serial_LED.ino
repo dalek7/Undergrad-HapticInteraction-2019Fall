@@ -11,7 +11,8 @@ void loop() {
     int inByte = Serial.read();
 
     if(inByte=='0')
-      digitalWrite(LED_BUILTIN, LOW);   // turn the LED on (HIGH is the voltage level)
+      digitalWrite(LED_BUILTIN, LOW);   
+      // turn the LED on (HIGH is the voltage level)
     else if(inByte=='1')
       digitalWrite(LED_BUILTIN, HIGH); 
   }
