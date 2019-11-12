@@ -4,7 +4,7 @@ int rawPos;
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(9600);
+  Serial.begin(9600);//9600
   pinMode(sensorPosPin, INPUT); // set MR sensor pin to be an input
 
 }
