@@ -2,8 +2,9 @@
 // Tania Morimoto and Allison Okamura, Stanford University
 // 11.16.13
 // Code to test basic Hapkit functionality (sensing and force output)
+// Modified for 601105 @Hallym University
+// test at 2019/11/12 at KAIST
 //--------------------------------------------------------------------------
-// test at 20191112 at KAIST
 // Includes
 #include <math.h>
 
@@ -67,7 +68,6 @@ void setup()
   lastLastRawPos = analogRead(sensorPosPin);
   lastRawPos = analogRead(sensorPosPin);
 }
-
 
 // --------------------------------------------------------------
 // Main Loop
@@ -159,8 +159,8 @@ void loop()
 //         force = 0;
 //       }
 //     }
-  // Lab 4 Step 4.3: render a VIRTUAL WALL
-     double x_wall = .01;
+  // render a VIRTUAL WALL
+     double x_wall = 0.01;// 10 cm
      double k_wall = 400;
      if(xh>x_wall) {
        force = -k_wall*(xh-x_wall);
@@ -169,30 +169,7 @@ void loop()
      }
   // Step 3.2: 
      Tp = rp/rs * rh * force;    // Compute the require motor pulley torque (Tp) to generate that force
-  
- 
-  //This next section is OPTIONAL depending on if you have a FSR
-  //*************************************************************
-  //*** Section 4. Compute measured handle force in Newtons ***** 
-  //*************************************************************
- 
-  // ADD YOUR CODE HERE
-  // Step 4.1: 
-     int fsrValue = analogRead(fsrPin);  // Read the analog input value from the FSR pin ansd store in the variable fsrValue
-  // Step 4.2: print fsrValue via serial monitor
-     //Serial.println(fsrValue);
-  // Step 4.7: 
-     float fsrForce = -.0026*fsrValue; // Compute the (approximate) FSR measured force value in Newtons, based on calibration
-  // Step 4.8: print fsrForce via serial monitor
-     //Serial.println(fsrForce);
-  // Lab 4 Step 1.10: 
-     //Serial.print(xh,5);        //print xh (in m), without a line break
-     //Serial.print("\t");          //print a tab, without a line break
-     //Serial.println(fsrForce);  //print the measured fsrForce (in N), with a line break
-  // Lab 4 Step 2.7: record virtual damper data
-     //Serial.print(vh,5);        //print xh (in m), without a line break
-     //Serial.print("\t");          //print a tab, without a line break
-     //Serial.println(fsrForce);  //print the measured fsrForce (in N), with a line break
+
   //*************************************************************
   //*** Section 5. Force output (do not change) *****************
   //*************************************************************
@@ -213,8 +190,16 @@ void loop()
   } else if (duty < 0) { 
     duty = 0;
   }  
+
+  // Output
+  Serial.print(rawPos);
+  Serial.print(",");
+  Serial.print(xh,5);
+  Serial.print(",");
+  Serial.println(duty);
   output = (int)(duty* 255);   // convert duty cycle to output signal
   analogWrite(pwmPin,output);  // output the signal
+  
 }
 
 // --------------------------------------------------------------

@@ -37,7 +37,7 @@ void loop() {
   //*************************************************************
   //*** Section 3. Assign a motor output force in Newtons *******
   //*************************************************************
-  force = 0.5;
+  force = 1.0;
   
   if (dirFlag == 1)
   {
@@ -153,7 +153,7 @@ ISR(TIMER1_COMPA_vect)
   PORTB |= B00100000;
 
   cnt++;
-  if (cnt % 2500 == 0)
+  if (cnt % (2500/2) == 0)
   {
     if (dirFlag == 0)
     {
