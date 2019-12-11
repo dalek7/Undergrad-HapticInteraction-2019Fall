@@ -34,9 +34,6 @@ unsigned int output = 0;    // output command to the motor
 
 void loop() {
 
-  //*************************************************************
-  //*** Section 3. Assign a motor output force in Newtons *******
-  //*************************************************************
   force = 1.0;
   
   if (dirFlag == 1)

@@ -1,1 +1,3 @@
-# Undergrad-HapticInteraction-2019Fall
+### Introduction
+
+Haptic interaction lecture

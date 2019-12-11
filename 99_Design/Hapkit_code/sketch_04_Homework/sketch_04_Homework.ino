@@ -4,7 +4,6 @@
 // Code to test basic Hapkit functionality (sensing and force output)
 // Modified for 601105 @Hallym University
 // test at 2019/11/12 at KAIST
-// works with 03_Processing-Arduino\sketch03_SerialReceiveDrawFromArduino
 //--------------------------------------------------------------------------
 // Includes
 #include <math.h>
@@ -41,7 +40,7 @@ double force = 0;           // force at the handle
 double Tp = 0;              // torque of the motor pulley
 double duty = 0;            // duty cylce (between 0 and 255)
 unsigned int output = 0;    // output command to the motor
-int cnt = 0;
+
 // --------------------------------------------------------------
 // Setup function -- NO NEED TO EDIT
 // --------------------------------------------------------------
@@ -193,20 +192,14 @@ void loop()
   }  
 
   // Output
-  if(++cnt %10 ==0)
-  {
-    Serial.println(rawPos);
-    /*
-    Serial.print(",");
-    Serial.print(xh,5);
-    Serial.print(",");
-    Serial.println(duty);
-    */
-    cnt = 0;
-  }
-  
+  Serial.print(rawPos);
+  Serial.print(",");
+  Serial.print(xh,5);
+  Serial.print(",");
+  Serial.println(duty);
   output = (int)(duty* 255);   // convert duty cycle to output signal
   analogWrite(pwmPin,output);  // output the signal
+  
 }
 
 // --------------------------------------------------------------

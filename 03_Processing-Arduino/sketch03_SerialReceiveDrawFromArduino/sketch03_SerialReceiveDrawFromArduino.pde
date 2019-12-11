@@ -1,6 +1,13 @@
+// Code to visulize basic Hapkit functionality (sensing)
+// Developed for 601105 @Hallym University
+// works with 99_Design\Hapkit_code\sketch_03_HardWall
+
 import processing.serial.*;
+
 Serial myPort; 
 String portName;
+String stringRecvFromArduino;
+
 float val1;
 float[] keep_val1;
 
@@ -14,13 +21,13 @@ void setup() {
   // Open the port you are using at the rate you want:
   //myPort = new Serial(this, Serial.list()[0], 9600);
   
-  int portnum=Serial.list().length - 1;
-  myPort = new Serial(this, Serial.list()[portnum], 9600);
+  int portnum = Serial.list().length - 1;
+  myPort = new Serial(this, Serial.list()[portnum], 38400);
   portName = Serial.list()[portnum];
-  
-  
+    
   keep_val1 = new float[nSample];
   val1 = 0;
+  stringRecvFromArduino="";
 }
 
 
@@ -34,6 +41,8 @@ void draw() {
   
   buf = String.format("%06d, %.0f", frameCount, val1);
   text(buf, 20,50);
+  
+  text(stringRecvFromArduino, 20,70);
   
   // Draw graph
   int offset_x1 = 100;
@@ -53,39 +62,40 @@ void draw() {
   while (myPort.available() > 0) 
   {
     String str1  = myPort.readStringUntil(lf);//myPort.readString();
-    
+    stringRecvFromArduino = str1;
+
     if (str1 != null) 
     {
       val1 = float(str1);
       ShiftWithNewf(keep_val1, val1);
     }
+
   }
 }
 
 
-
-float GetMean(float[] arr)
+public static float GetMean(float[] arr)
 {
   int sz = arr.length;
   int i;
   float sum =0;
   for(i=0; i< sz; i++)
   {
-    sum = sum + arr[i];
+  sum = sum + arr[i];
   }
   
-  float mean = sum / float(i);
+  float mean = sum / (float)i;
   return mean;
 }
 
-void ShiftWithNewf(float[] arr, float n_val)
+public static void ShiftWithNewf(float[] arr, float n_val)
 {
   int sz = arr.length;
   int i;
   for(i=0; i< sz-1; i++)
   {
-    arr[sz-1-i] = arr[sz-2-i];
-    
+  arr[sz-1-i] = arr[sz-2-i];
+  
   }
 
   arr[0] = n_val;

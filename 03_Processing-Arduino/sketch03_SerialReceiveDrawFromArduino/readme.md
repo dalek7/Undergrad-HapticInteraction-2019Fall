@@ -4,6 +4,8 @@
 ### Usage
 Arduino <a href='../../99_Design/Hapkit_code/sketch_01_SensorTest' target='_blank'>99_Design/Hapkit_code/sketch_01_SensorTest</a> 와 같이 동작하는 코드입니다.
 
+<br/>
+<img src='image02.png' width=640px />
 
 ### 생각해보기
 그림그리는 부분입니다. 
