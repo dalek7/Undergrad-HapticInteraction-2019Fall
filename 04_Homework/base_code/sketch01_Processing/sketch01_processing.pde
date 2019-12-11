@@ -48,11 +48,15 @@ void draw() {
   
   text(stringRecvFromArduino, 20,90);
   
-  // Draw graph
+  text("Sensor values", 20,220);
+  text("Position, xh", 20,340);
+  text("Force", 20,440);
+
+  // Draw graph - raw sensor values
   int offset_x1 = 100;
-  int offset_y1 = 400;
+  int offset_y1 = 250;
   int y1, y2;
-  float g = 0.25;
+  float g = 0.05;
   float gx = 2.0;
   for(int i=0; i<nSample-1; i++)
   {
@@ -63,7 +67,32 @@ void draw() {
     
   }
   
+  // Draw graph - Position : xh
+  offset_x1 = 100;
+  offset_y1 = 350;
+  g = 3000.0;
+
+ 
+
+
+
+
+
+  // Draw graph - Force
+  offset_x1 = 100;
+  offset_y1 = 450;
+  g = 100.0;	
+
+
+
+
+
+
   
+
+
+
+
   // Receiving from Arduino
   while (myPort.available() > 0) 
   {
