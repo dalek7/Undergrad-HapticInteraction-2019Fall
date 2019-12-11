@@ -215,7 +215,7 @@ void loop()
   }  
 
   // Output
-  if(++cnt %10 ==0)
+  if(++cnt %20 ==0)
   {
     Serial.print(rawPos); 
     Serial.print(",");
