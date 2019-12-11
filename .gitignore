@@ -1,5 +1,6 @@
 # Custom
 *.bak
+__*/
 
 # Prerequisites
 *.d
